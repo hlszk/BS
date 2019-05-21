@@ -8,30 +8,35 @@
 * Explanation for the boilerplate code: https://bl.ocks.org/denjn5/f059c1f78f9c39d922b1c208815d18af
 */
 
-(function () {
-    'use strict';
 
-    const format = d3.format(",d");
-    const width = 500;
-    const height = 500;
-    const radius = width / 6;
+const format = d3.format(",d");
+const width = 500;
+const height = 500;
+const radius = width / 6;
 
-    const arc = d3.arc()
-        .startAngle(d => d.x0)
-        .endAngle(d => d.x1)
-        .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
-        .padRadius(radius * 1.5)
-        .innerRadius(d => d.y0 * radius)
-        .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1));
+const arc = d3.arc()
+    .startAngle(d => d.x0)
+    .endAngle(d => d.x1)
+    .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
+    .padRadius(radius * 1.5)
+    .innerRadius(d => d.y0 * radius)
+    .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1));
 
-    const partition = data => {
-        const root = d3.hierarchy(data)
-            .sum(d => d.size)
-            .sort((a, b) => b.value - a.value);
-        return d3.partition()
-            .size([2 * Math.PI, root.height + 1])
-            (root);
-    };
+const partition = data => {
+    const root = d3.hierarchy(data)
+        .sum(d => d.size)
+        .sort((a, b) => b.value - a.value);
+    return d3.partition()
+        .size([2 * Math.PI, root.height + 1])
+        (root);
+};
+
+drawContainer();
+
+function drawContainer() {
+
+    // Remove old visualisation
+    d3.selectAll("g").remove();
 
     const root = partition(data);
     const color = d3.scaleOrdinal().range(d3.quantize(d3.interpolateRainbow, data.children.length + 1));
@@ -70,19 +75,24 @@
         .attr("fill-opacity", d => +labelVisible(d.current))
         .attr("transform", d => labelTransform(d.current))
         .text(d => d.data.name);
+}
 
-    function arcVisible(d) {
-        return d.y1 <= 3 && d.y0 >= 1 && d.x1 > d.x0;
-    }
+function arcVisible(d) {
+    return d.y1 <= 3 && d.y0 >= 1 && d.x1 > d.x0;
+}
 
-    function labelVisible(d) {
-        return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.03;
-    }
+function labelVisible(d) {
+    return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.03;
+}
 
-    function labelTransform(d) {
-        const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-        const y = (d.y0 + d.y1) / 2 * radius;
-        return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
-    }
+function labelTransform(d) {
+    const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+    const y = (d.y0 + d.y1) / 2 * radius;
+    return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
+}
 
-}());
+// Update visualisation with new data
+function updateData() {
+    data = newData;
+    drawContainer();
+}
