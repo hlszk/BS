@@ -5,19 +5,27 @@
     <meta charset="UTF-8">
     <title>Betriebssysteme-Übung</title>
 
-    // d3.js framework
+    <!-- d3.js framework -->
     <script type="text/javascript" src="./d3/d3.js"></script>
 
-    // JavaScript
-    <script src="./js/view.js"></script>
-    <script src="./js/container.js"></script>
-    <script src="./js/fuse.js"></script>
-
-    // stylesheets
+    <!-- stylesheets -->
     <link rel="stylesheet" href="./css/css.css">
 
 </head>
 <body>
+
+<!--
+Creating SVG element for our container visualisation
+https://de.wikipedia.org/wiki/Scalable_Vector_Graphics
+-->
+<svg id="container" width="560" height="300" viewBox="0 0 932 932"></svg>
+
+<!-- JavaScript code for visualising our container -->
+<script src="./js/view.js"></script>
+
+<!-- JavaScript code for computations -->
+<script src="./js/container.js"></script>
+<script src="./js/fuse.js"></script>
 
 </body>
 </html>
