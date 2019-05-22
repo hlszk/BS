@@ -17,7 +17,7 @@ const containerStructures = {
 const maxDataSize = 65087;
 
 // Container as array for better object manipulation
-var data = {
+let data = {
     "name": "Container",
     "children": [
         {
@@ -36,7 +36,7 @@ var data = {
 console.log(data.children[1]);
 console.log(data.children.length);
 
-// Forcing copying JavaScript object by value not reference
+// Forcing object copy by value not reference
 const newData = JSON.parse(JSON.stringify(data));
 newData.children[1].children = [{"name": "A1", "size": 1}];
 
