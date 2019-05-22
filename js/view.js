@@ -2,10 +2,12 @@
 * Visualisation of container.
 *
 * Using JavaScript framework d3: https://d3js.org/
-* Using partition API: https://github.com/d3/d3-hierarchy/blob/v1.1.8/README.md#partition
+* Using d3 partition API: https://github.com/d3/d3-hierarchy/blob/v1.1.8/README.md#partition
 *
 * Using boilerplate code for partition API written by d3 founder: https://observablehq.com/@d3/sunburst
 * Explanation for the boilerplate code: https://bl.ocks.org/denjn5/f059c1f78f9c39d922b1c208815d18af
+*
+* Comments only for non-boilerplate code added by me.
 */
 
 
@@ -35,7 +37,7 @@ drawContainer();
 
 function drawContainer() {
 
-    // Remove old visualisation
+    // Remove old visualisation elements from SVG
     d3.selectAll("g").remove();
 
     const root = partition(data);
