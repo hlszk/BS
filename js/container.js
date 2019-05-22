@@ -2,21 +2,10 @@
 * Container structures.
 */
 
-// Container structure names and size
-// Object key: Name
-// Object value: Size
-const containerStructures = {
-    "Superblock": 1,
-    "DMAP": 16,
-    "FAT": 256,
-    "Root": 64,
-    "Data": 0
-};
-
 // Maximum size for data block
 const maxDataSize = 65087;
 
-// Container as array for better object manipulation
+// Container structures with block sizes als values
 let data = {
     "name": "Container",
     "children": [
@@ -33,14 +22,29 @@ let data = {
         }]
 };
 
-console.log(data.children[1]);
-console.log(data.children.length);
-
 // Forcing object copy by value not reference
 const newData = JSON.parse(JSON.stringify(data));
-newData.children[1].children = [{"name": "A1", "size": 1}];
 
-// var data = JSON.stringify(dataObject);
+/*
+* DMAP
+*/
+
+// Marking free space in DMAP als "F"
+// Size value is (16 available dmap blocks / 65087 data blocks)
+/*for (let i = 0; i < 65086; i++) {
+    newData.children[1].children[i] = [{"name": "F", "size": 0.00024582481}];
+}*/
+
+
+
+// newData.children[1].children = [{"name": "A", "size": 2}];
+
+/*
+* ROOT DIRECTORY
+*/
+
+// Adding new file to root directory
+newData.children[3].children = [{"name": "File 1", "size": 1}];
 
 // JSON data
 /*var data = {
