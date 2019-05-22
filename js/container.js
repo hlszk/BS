@@ -30,11 +30,11 @@ var newData = JSON.parse(JSON.stringify(data));
 */
 
 // Allocating free space in DMAP als "F"
-
-newData.children[1].children = [{"name": "F", "size": 1}];
-
+// nesting first element
+data.children[1].children = [{"name": "F", "size": 1}];
+// nesting (n > 1) elements
 for (let i = 1; i < 16; i++) {
-    newData.children[1].children[i] = {"name": "F", "size": 1};
+    data.children[1].children[i] = {"name": "F", "size": 1};
 }
 
 
