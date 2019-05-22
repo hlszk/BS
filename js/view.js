@@ -105,9 +105,6 @@ function drawContainer() {
 
         const t = g.transition().duration(750);
 
-        // Transition the data on all arcs, even the ones that aren’t visible,
-        // so that if this transition is interrupted, entering arcs will start
-        // the next transition from the desired position.
         path.transition(t)
             .tween("data", d => {
                 const i = d3.interpolate(d.current, d.target);
