@@ -22,9 +22,6 @@ let data = {
         }]
 };
 
-// Forcing object copy by value not reference
-var newData = JSON.parse(JSON.stringify(data));
-
 /*
 * DMAP
 */
@@ -37,6 +34,8 @@ for (let i = 1; i < 16; i++) {
     data.children[1].children[i] = {"name": "F", "size": 1};
 }
 
+// Forcing object copy by value not reference
+var newData = JSON.parse(JSON.stringify(data));
 
 /*
 * ROOT DIRECTORY
