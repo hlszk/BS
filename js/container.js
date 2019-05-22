@@ -2,9 +2,6 @@
 * Container structures.
 */
 
-// Maximum size for data block
-const maxDataSize = 65087;
-
 // Container structures with block sizes als values
 let data = {
     "name": "Container",
@@ -14,11 +11,11 @@ let data = {
         }, {
             "name": "DMAP",
         }, {
-            "name": "FAT", "size": 128
+            "name": "FAT", "size": 32
         }, {
-            "name": "Root", "size": 64
+            "name": "Root", "size": 16
         }, {
-            "name": "Data", "size": 64
+            "name": "Data", "size": 32
         }]
 };
 
@@ -30,7 +27,7 @@ let data = {
 // nesting first element
 data.children[1].children = [{"name": "F", "size": 1}];
 // nesting (n > 1) elements
-for (let i = 1; i < 16; i++) {
+for (let i = 1; i < 32; i++) {
     data.children[1].children[i] = {"name": "F", "size": 1};
 }
 
