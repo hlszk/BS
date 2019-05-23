@@ -19,6 +19,10 @@ let data = {
         }]
 };
 
+// After initial drawn we need new data
+// Forcing object copy by value not reference
+var newData = JSON.parse(JSON.stringify(data));
+
 /*
 * DMAP
 */
@@ -31,12 +35,74 @@ for (let i = 1; i < 32; i++) {
     data.children[1].children[i] = {"name": "F", "size": 1};
 }
 
-// Forcing object copy by value not reference
-var newData = JSON.parse(JSON.stringify(data));
+// Get next free blocks
+function getFreeBlock() {
+
+}
+
+// Set free ("F") or allocated ("A") state
+function setBlock(state) {
+
+}
+
+
+/*
+* FAT
+*/
+
+// Read next address in table
+function readAddress() {
+
+}
+
+// Write next address to table
+// Addresses are randomized for better understanding the need of an allocation table
+function writeAddress() {
+
+}
 
 /*
 * ROOT DIRECTORY
 */
 
-// Adding new file to root directory
-newData.children[3].children = [{"name": "File 1", "size": 1}];
+/*
+* Get inode data for file
+* @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
+*/
+const maxNumberOfFiles = 16;
+
+function getFile(num) {
+
+}
+
+/*
+* Write inode data for file
+* @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
+*/
+function writeFile(num) {
+    if (num === 0) {
+        newData.children[3].children = [{"name": "File 1", "size": 1}];
+    }
+}
+
+/*
+* Delete file from root directory
+* @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
+*/
+function deleteFile(num) {
+
+}
+
+/*
+* DATA
+*/
+
+// Write in data sector
+function writeData(address) {
+
+}
+
+// Delete data
+function deleteData(address) {
+
+}
