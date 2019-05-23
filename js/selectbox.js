@@ -1,4 +1,4 @@
-var fuseMethods = [
+var fileOptions = [
     "Add small file (one data block)",
     "Add big file (two data blocks)",
     "Remove file"
@@ -6,16 +6,21 @@ var fuseMethods = [
 
 const select = d3.select('body')
     .append('select')
-    .on('change', onchange);
+    .on('change', selectOption);
 
 const options = select
     .selectAll('option')
-    .data(fuseMethods).enter()
+    .data(fileOptions).enter()
     .append('option')
     .text(d => d);
 
-function onchange() {
+function selectOption() {
     let selectValue = d3.select('select').property('value');
-    console.log(selectValue);
+    
+    switch (selectValue) {
+        case fileOptions[0]: fuseOpen(false); break;
+        case fileOptions[1]: fuseOpen(true); break;
+    }
+    
     updateData();
 }

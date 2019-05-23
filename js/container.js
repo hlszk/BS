@@ -4,6 +4,8 @@
 
 // Maximal number of files stored
 const maxNumberOfFiles = 16;
+// Number of files open
+var numberOfOpenFiles = 0;
 
 // Container structures with block sizes als values
 let data = {
@@ -22,15 +24,17 @@ let data = {
         }]
 };
 
-// After initial drawn we need new data
-// Forcing object copy by value not reference
-var newData = JSON.parse(JSON.stringify(data));
-
 /*
+* ********************
 * DMAP
 */
 
-// Allocating free space in DMAP als "F"
+/*
+* Allocating free space in DMAP als "F"
+* data.children[1].children is "DMAP"
+*
+* */
+
 // nesting first element
 data.children[1].children = [{"name": "F", "size": 1}];
 // nesting (n > 1) elements
@@ -50,6 +54,7 @@ function setBlock(state) {
 
 
 /*
+* ********************
 * FAT
 */
 
@@ -65,11 +70,13 @@ function writeAddress() {
 }
 
 /*
+* ********************
 * ROOT DIRECTORY
 */
 
 /*
 * Get inode data for file
+*
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function getFile(num) {
@@ -78,16 +85,23 @@ function getFile(num) {
 
 /*
 * Write inode data for file
+*
+* data.children[3].children is "Root"
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function writeFile(num) {
+    // nesting first element
     if (num === 0) {
-        newData.children[3].children = [{"name": "File " + i, "size": 1}];
+        data.children[3].children = [{"name": "File " + num, "size": 1}];
+    } else {
+        // nesting (n > 1) elements
+
     }
 }
 
 /*
 * Delete file from root directory
+*
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function deleteFile(num) {
@@ -95,6 +109,7 @@ function deleteFile(num) {
 }
 
 /*
+* ********************
 * DATA
 */
 

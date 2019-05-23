@@ -139,6 +139,5 @@ function labelTransform(d) {
 
 // Update visualisation with new data
 function updateData() {
-    data = newData;
     drawContainer();
 }
