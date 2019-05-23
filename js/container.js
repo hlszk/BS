@@ -25,6 +25,7 @@ let data = {
         }]
 };
 
+
 /*
 * ********************
 * DMAP
@@ -43,7 +44,12 @@ for (let i = 1; i < 32; i++) {
     data.children[1].children[i] = {"name": "F", "size": 1};
 }
 
-getFreeBlock();
+writeFile(0);
+writeFile(1);
+writeFile(2);
+deleteFile(1);
+deleteFile(0);
+deleteFile(2);
 
 // Get next free block
 function getFreeBlock() {
@@ -84,6 +90,7 @@ function writeAddress() {
 
 }
 
+
 /*
 * ********************
 * ROOT DIRECTORY
@@ -107,21 +114,23 @@ function getFile(num) {
 function writeFile(num) {
     // nesting first element
     if (num === 0) {
-        data.children[3].children = [{"name": "File " + num, "size": 1}];
+        data.children[3].children = [{"name": "File " + (num + 1), "size": 1}];
     } else {
         // nesting (n > 1) elements
-
+        data.children[3].children[num] = {"name": "File " + (num + 1), "size": 1};
     }
 }
 
 /*
 * Delete file from root directory
 *
+* data.children[3].children is "Root"
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function deleteFile(num) {
-
+    data.children[3].children[num] = {};
 }
+
 
 /*
 * ********************
