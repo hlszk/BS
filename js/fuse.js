@@ -20,6 +20,16 @@ function fuseInit() {
 function fuseOpen(isBiggerFile) {
     console.log("fuseOpen() called.");
 
+    // Check which files are already written
+    // fuseReaddir();
+
+}
+
+// Lists all files written in container
+function fuseReaddir() {
+    console.log("fuseReaddir() called.");
+
+    // console.log(data.children[3].children);
 }
 
 /*
@@ -45,7 +55,6 @@ function fuseGetattr(num) {
 // FUSE methods to implement
 /*
 var fuseMethods = [
-    "fuseReaddir",
     "fuseRead",
     "fuseRelease",
     "fuseMknod",

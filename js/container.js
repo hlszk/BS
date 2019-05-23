@@ -4,10 +4,11 @@
 
 // Maximal number of files stored
 const maxNumberOfFiles = 16;
+
 // Number of files open
 var numberOfOpenFiles = 0;
 
-// Container structures with block sizes als values
+// Object with container structures and their block size
 let data = {
     "name": "Container",
     "children": [
@@ -35,20 +36,35 @@ let data = {
 *
 * */
 
-// nesting first element
-data.children[1].children = [{"name": "F", "size": 1}];
-// nesting (n > 1) elements
+// Nesting first element into container object
+data.children[1].children = [{"name": "A", "size": 1}];
+// Nesting (n > 1) element into container object
 for (let i = 1; i < 32; i++) {
     data.children[1].children[i] = {"name": "F", "size": 1};
 }
 
-// Get next free blocks
+getFreeBlock();
+
+// Get next free block
 function getFreeBlock() {
 
+    // Iterate all DMAP entries
+    for (let block in data.children[1].children)
+        if (data.children[1].children.hasOwnProperty(block) &&
+            data.children[1].children[block].name === "F") {
+             return block;
+        }
 }
 
-// Set free ("F") or allocated ("A") state
-function setBlock(state) {
+// TODO: ENOSPC error
+
+/*
+* Set state
+*
+* @param block: Block number in DMAP
+* @param state: Free ("F") or allocated ("A")
+*/
+function setBlock(block, state) {
 
 }
 

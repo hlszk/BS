@@ -121,6 +121,14 @@ function drawContainer() {
             .attr("fill-opacity", d => +labelVisible(d.target))
             .attrTween("transform", d => () => labelTransform(d.current));
     }
+
+    // Color free DMAP blocks in different color
+    d3.selectAll("svg text")
+        .filter(function() {
+            // Check if DMAP is allocated
+            return /^F$/.test(d3.select(this).text());
+        })
+        .attr("fill", "white");
 }
 
 function arcVisible(d) {
