@@ -52,11 +52,10 @@ function getFreeBlock() {
     for (let block in data.children[1].children)
         if (data.children[1].children.hasOwnProperty(block) &&
             data.children[1].children[block].name === "F") {
-             return block;
+            return block;
         }
+    console.error("error ENOSPC: Not enough space")
 }
-
-// TODO: ENOSPC error
 
 /*
 * Set state
@@ -65,7 +64,7 @@ function getFreeBlock() {
 * @param state: Free ("F") or allocated ("A")
 */
 function setBlock(block, state) {
-
+    data.children[1].children[block].name = state;
 }
 
 
