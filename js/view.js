@@ -43,6 +43,7 @@ function drawContainer() {
 
     root.each(d => d.current = d);
 
+    // Using our svg element with id "container" in index.html
     const svg = d3.select('#container')
         .style("width", width)
         .style("height", height)

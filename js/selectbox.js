@@ -1,12 +1,7 @@
 var fuseMethods = [
-    "fuseReaddir",
-    "fuseGetattr",
-    "fuseOpen",
-    "fuseRead",
-    "fuseRelease",
-    "fuseMknod",
-    "fuseWrite",
-    "fuseUnlink"
+    "Add small file (one data block)",
+    "Add big file (two data blocks)",
+    "Remove file"
 ];
 
 const select = d3.select('body')

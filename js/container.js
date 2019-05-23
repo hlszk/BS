@@ -2,6 +2,9 @@
 * Container structures.
 */
 
+// Maximal number of files stored
+const maxNumberOfFiles = 16;
+
 // Container structures with block sizes als values
 let data = {
     "name": "Container",
@@ -69,8 +72,6 @@ function writeAddress() {
 * Get inode data for file
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
-const maxNumberOfFiles = 16;
-
 function getFile(num) {
 
 }
@@ -81,7 +82,7 @@ function getFile(num) {
 */
 function writeFile(num) {
     if (num === 0) {
-        newData.children[3].children = [{"name": "File 1", "size": 1}];
+        newData.children[3].children = [{"name": "File " + i, "size": 1}];
     }
 }
 
