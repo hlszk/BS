@@ -8,9 +8,9 @@ D3 ist das meistgenutzteste Datenvisualisierungsframework für JavaScript und wi
 
 Öffnen der Datei `index.html` in einem Browser, getestet ausschließlich in Google Chrome aufgrund der optimalsten ECMAScript-Sprachunterstützung.
 
-Klicken in einen farbigen Sektor zoomt herein, klicken in die weiße leere Mitte der Visualisierung zoomt heraus.
+Das Klicken in einen farbigen Sektor zoomt herein, das Klicken in die weiße leere Mitte der Visualisierung zoomt heraus.
 
-Welche FUSE-Methoden aufgerufen werden, sieht man in der Konsole vom Browser, bei Chrome in den [Entwicklertools](https://developers.google.com/web/tools/chrome-devtools/).
+Welche FUSE-Methoden aufgerufen werden, wird in der Browserkonsole ausgegeben. Bei Chrome ist die Konsole in den [Entwicklertools](https://developers.google.com/web/tools/chrome-devtools/).
 
 ### Grenzen der Visualisierung
 
