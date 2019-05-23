@@ -122,10 +122,10 @@ function drawContainer() {
             .attrTween("transform", d => () => labelTransform(d.current));
     }
 
-    // Color free DMAP blocks in different color
+    // Colorize free DMAP blocks in different color
     d3.selectAll("svg text")
         .filter(function() {
-            // Check if DMAP is allocated
+            // Check if DMAP is free
             return /^F$/.test(d3.select(this).text());
         })
         .attr("fill", "white");

@@ -37,7 +37,7 @@ let data = {
 * */
 
 // Nesting first element into container object
-data.children[1].children = [{"name": "A", "size": 1}];
+data.children[1].children = [{"name": "F", "size": 1}];
 // Nesting (n > 1) element into container object
 for (let i = 1; i < 32; i++) {
     data.children[1].children[i] = {"name": "F", "size": 1};
