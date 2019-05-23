@@ -2,6 +2,8 @@
 
 Implementiert mithilfe von JavaScript und dem Visualisierungs-Framework [D3.js](https://d3js.org/).
 
+D3 ist das meistgenutzteste Datenvisualisierungsframework für JavaScript und wird beispielsweise von der Hochschule Karlsruhe für die [Visualisierung der Modulabhängigkeiten](http://www.iwi.hs-karlsruhe.de/iwii/info/moduledependencies/INFB/0) genutzt.
+
 ### Funktionsweise
 
 Öffnen der Datei `index.html` in einem Browser, getestet ausschließlich in Google Chrome aufgrund der optimalsten ECMAScript-Sprachunterstützung.
