@@ -33,8 +33,6 @@ const partition = data => {
         (root);
 };
 
-drawContainer();
-
 function drawContainer() {
 
     // Remove old visualisation elements from SVG

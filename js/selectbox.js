@@ -1,5 +1,4 @@
 var fuseMethods = [
-    "fuseInit",
     "fuseReaddir",
     "fuseGetattr",
     "fuseOpen",
@@ -10,11 +9,11 @@ var fuseMethods = [
     "fuseUnlink"
 ];
 
-var select = d3.select('body')
+const select = d3.select('body')
     .append('select')
     .on('change', onchange);
 
-var options = select
+const options = select
     .selectAll('option')
     .data(fuseMethods).enter()
     .append('option')

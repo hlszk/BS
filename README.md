@@ -8,6 +8,8 @@ Implementiert mithilfe von JavaScript und dem Visualisierungs-Framework [D3.js](
 
 Klicken in einen farbigen Sektor zoomt herein, klicken in die weiße leere Mitte der Visualisierung zoomt heraus.
 
+Welche FUSE-Methoden aufgerufen werden, sieht man in der Konsole vom Browser, bei Chrome in den [Entwicklertools](https://developers.google.com/web/tools/chrome-devtools/).
+
 ### Grenzen der Visualisierung
 
 Das Rendering von 65536 Dateiblöcken und derer Belegungsanzeige in den anderen Sektoren überfordert die JavaScript-Engine, sodass ein stark verkleinertes und vereinfachtes System dargestellt wird:
