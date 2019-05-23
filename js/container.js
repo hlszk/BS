@@ -106,7 +106,7 @@ function getFile(num) {
             {
                 "name": date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), "size": .5
             }, {
-                "name": "Blockgröße " + 2, "size": .5
+                "name": "Blockgröße 2", "size": .5
             }]
     };
 }

@@ -17,7 +17,7 @@ function fuseInit() {
 *
 * @param isBiggerFile: false for one data block, true for two data blocks
 */
-function fuseOpen(isBiggerFile) {
+function fuseOpen() {
     console.log("fuseOpen() called.");
 
     // Check which files are already written

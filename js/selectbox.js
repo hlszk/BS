@@ -5,8 +5,7 @@
 // Options of selection box
 const fileOptions = [
     "Select one:",
-    "Add small file (one data block)",
-    "Add big file (two data blocks)",
+    "Add file",
     "Remove file"
 ];
 
@@ -32,8 +31,7 @@ function selectOption() {
     // Calling FUSE methods
     switch (selectValue) {
         case fileOptions[0]: break;
-        case fileOptions[1]: fuseOpen(false); break;
-        case fileOptions[2]: fuseOpen(true); break;
+        case fileOptions[1]: fuseOpen(); break;
     }
     
     updateData();
