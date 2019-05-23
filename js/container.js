@@ -46,10 +46,6 @@ for (let i = 1; i < 32; i++) {
 
 writeFile(0);
 writeFile(1);
-writeFile(2);
-deleteFile(1);
-deleteFile(0);
-deleteFile(2);
 
 // Get next free block
 function getFreeBlock() {
@@ -97,27 +93,40 @@ function writeAddress() {
 */
 
 /*
-* Get inode data for file
+* Get stat data for file
 *
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function getFile(num) {
-
+    // Current timestamp
+    const date = new Date();
+    return {
+        "name": "File " + (num + 1),
+        "children": [
+            {
+                "name": date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), "size": .5
+            }, {
+                "name": "Blockgröße " + 2, "size": .5
+            }]
+    };
 }
 
 /*
-* Write inode data for file
+* Write file information
 *
 * data.children[3].children is "Root"
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function writeFile(num) {
-    // nesting first element
+    // Get stat data for file
+    let child = getFile(num);
+
+    // Nesting first element
     if (num === 0) {
-        data.children[3].children = [{"name": "File " + (num + 1), "size": 1}];
+        data.children[3].children = [child];
     } else {
-        // nesting (n > 1) elements
-        data.children[3].children[num] = {"name": "File " + (num + 1), "size": 1};
+        // Nesting (n > 1) elements
+        data.children[3].children[num] = child;
     }
 }
 
