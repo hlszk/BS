@@ -15,5 +15,5 @@ Welche FUSE-Methoden aufgerufen werden, sieht man in der Konsole vom Browser, be
 Das Rendering von 65536 Dateiblöcken und derer Belegungsanzeige in den anderen Sektoren überfordert die JavaScript-Engine, sodass ein stark verkleinertes und vereinfachtes System dargestellt wird:
 * Jede Datei hat eine feste Größe von zwei Datenblöcken
 * Es sind maximal 16 Dateien zugelassen
-* Damit das Zusammenspiel zwischen den Sektoren besser erkennbar ist, werden die zu beschreibenden Datenblöcke per Zufallsgenerator bestimmt: So wird das Auffinden besser veranschaulicht
+* Damit das Zusammenspiel zwischen den stark verkleinerten Sektoren besser veranschaulicht wird, werden die zu beschreibenden Datenblöcke per Zufallsgenerator bestimmt
 
