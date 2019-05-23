@@ -12,6 +12,8 @@ Das Klicken in einen farbigen Sektor zoomt herein, das Klicken in die weiße lee
 
 Welche FUSE-Methoden aufgerufen werden, wird in der Browserkonsole ausgegeben. Bei Chrome ist die Konsole in den [Entwicklertools](https://developers.google.com/web/tools/chrome-devtools/).
 
+Fehlermeldungen werden ebenfalls in der Browserkonsole ausgegeben.
+
 ### Grenzen der Visualisierung
 
 Das Rendering von 65536 Datenblöcken und derer Belegungsanzeige in den anderen Sektoren überfordert die JavaScript-Engine, sodass ein stark verkleinertes und vereinfachtes System dargestellt wird:
