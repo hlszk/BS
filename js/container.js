@@ -113,9 +113,9 @@ function writeAddress(num) {
 
     // Write two fat blocks with addresses in data block
     data.children[2].children[fatBlock] =
-        {"name": (num + 1) + " → " + dataBlocksToFill[0], "size": 1, "file": num};
+        {"name": "File " + (num + 1) + " → " + dataBlocksToFill[0], "size": 1, "file": num};
     data.children[2].children[++fatBlock] =
-        {"name": (num + 1) + " → " + dataBlocksToFill[1], "size": 1, "file": num};
+        {"name": "File " + (num + 1) + " → " + dataBlocksToFill[1], "size": 1, "file": num};
 
     // Write to data sector
     writeData(num, dataBlocksToFill);
