@@ -103,7 +103,12 @@ function getFile(num) {
         "name": "File " + (num + 1),
         "children": [
             {
-                "name": date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), "size": .5
+                "name":
+                    date.getHours() + ":" +
+                    // adds leading zero if missing
+                    ('0' + date.getMinutes()).slice(-2) + ":" +
+                    // adds leading zero if missing
+                    ('0' + date.getSeconds()).slice(-2), "size": .5
             }, {
                 "name": "Blockgröße 2", "size": .5
             }]
