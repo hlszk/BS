@@ -2,11 +2,18 @@
 * Selection box for adding or removing files in container
 */
 
+// Add button
+d3.select('#addFile')
+    .on('click', function () {
+        d3.event.stopPropagation();
+        fuseOpen();
+    });
+
 // Options of selection box
-const fileOptions = [
-    "Select one:",
-    "Add file",
-    "Remove file"
+const deleteOptions = [
+    "Delete file",
+    "File 1",
+    "File 2"
 ];
 
 // Add selection menu element to DOM
@@ -18,10 +25,10 @@ const select = d3.select('body')
 // Add selection options to newly created DOM element
 const options = select
     .selectAll('option')
-    .data(fileOptions).enter()
+    .data(deleteOptions).enter()
     .append('option')
     // Disable first selection option
-    .attr('disabled', d => (d === fileOptions[0]) ? true : null )
+    .attr('disabled', d => (d === deleteOptions[0]) ? true : null )
     .text(d => d);
 
 // Selection handler
@@ -30,8 +37,8 @@ function selectOption() {
 
     // Calling FUSE methods
     switch (selectValue) {
-        case fileOptions[0]: break;
-        case fileOptions[1]: fuseOpen(); break;
+        case deleteOptions[0]: break;
+        case deleteOptions[1]: fuseUnlink(0); break;
     }
     
     updateData();

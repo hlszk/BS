@@ -19,20 +19,28 @@ function fuseOpen() {
     // Check which files are already written
     // TODO: fuseReaddir();
 
-    fuseWrite(0);
-    fuseWrite(1);
-
+    fuseRead(0);
+    fuseRead(1);
+    fuseRead(2);
 }
 
 /*
-* Write file to container object
+* Read file new opened file
 *
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
-function fuseWrite(num) {
-    console.log("fuseWrite() called.");
-
+function fuseRead(num) {
+    console.log("fuseRead() called.");
     writeFile(num);
+
+    // Make changes visible
+    fuseWrite();
+}
+
+// Write a.k.a. "draw" file to container object
+function fuseWrite() {
+    console.log("fuseWrite() called.");
+    drawContainer();
 }
 
 // Lists all files written in container
@@ -56,7 +64,6 @@ function fuseUnlink(num) {
 
     // Remove file from root sector
     deleteFile(num);
-
 }
 
 /*
@@ -66,15 +73,12 @@ function fuseUnlink(num) {
 */
 function fuseGetattr(num) {
     console.log("fuseGetattr() called.");
-
     return getFile(num);
 }
 
 // FUSE methods to implement
 /*
 var fuseMethods = [
-    "fuseRead",
-    "fuseRelease",
-    "fuseMknod",
+    "fuseRelease"
 ];
 */
