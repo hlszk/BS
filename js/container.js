@@ -52,7 +52,7 @@ function getFreeBlock() {
     for (let block in data.children[1].children)
         if (data.children[1].children.hasOwnProperty(block) &&
             data.children[1].children[block].name === "F") {
-            return block;
+            return +block;
         }
     console.error("error ENOSPC: Not enough space")
 }
@@ -102,10 +102,12 @@ function writeAddress(num) {
 
     // Write two fat blocks with addresses in data block
     data.children[2].children[fatBlock] =
-        {"name": (+num + 1) + " → " + dataBlocksToFill[0], "size": 1, "address": dataBlocksToFill[0]};
+        {"name": (num + 1) + " → " + dataBlocksToFill[0], "size": 1, "address": dataBlocksToFill[0]};
     data.children[2].children[++fatBlock] =
-        {"name": (+num + 1) + " → " + dataBlocksToFill[1], "size": 1, "address": dataBlocksToFill[1]};
+        {"name": (num + 1) + " → " + dataBlocksToFill[1], "size": 1, "address": dataBlocksToFill[1]};
 
+    // Write to data sector
+    writeData(num, dataBlocksToFill);
 }
 
 
@@ -190,11 +192,17 @@ for (let i = 0; i < 32; i++) {
     data.children[4].children[i] = {"name": "", "size": 1};
 }
 
-// Write in data sector
-function writeData(address) {
-    console.log(data.children[4].children[address].name);
-    data.children[4].children[address].name = "File 1";
-    console.log(data.children[4].children[address].name);
+/*
+* Write in data sector
+*
+* data.children[4].children is "Data"
+* @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
+* @param addresses: Array filled with two free data addresses
+*/
+function writeData(num, addresses) {
+    // Fill data blocks with file data
+    data.children[4].children[addresses[0]].name = "File " + (num + 1) + " 1st block";
+    data.children[4].children[addresses[1]].name = "File " + (num + 1) + " 2nd block";
 }
 
 // Delete data
