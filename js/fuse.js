@@ -79,6 +79,9 @@ function fuseUnlink(num) {
     // Sets DMAP block free
     setBlock(num, "F");
 
+    // Deletes file from data sector
+    deleteData(num);
+
     // Remove file from root sector
     deleteFile(num);
 }

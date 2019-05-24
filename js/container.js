@@ -98,7 +98,7 @@ function writeAddress(num) {
 
     // Pop two free data blocks from array with available data blocks
     // Save these two free data block addresses to new array
-    let dataBlocksToFill = dataBlocksAvailable.splice(0,2);
+    let dataBlocksToFill = dataBlocksAvailable.splice(0, 2);
 
     // Write two fat blocks with addresses in data block
     data.children[2].children[fatBlock] =
@@ -189,7 +189,7 @@ let dataBlocksAvailable = [...Array(32).keys()].map(x => x);
 *
 * */
 for (let i = 0; i < 32; i++) {
-    data.children[4].children[i] = {"name": "", "size": 1};
+    data.children[4].children[i] = {"name": "", "size": 1, "file": ""};
 }
 
 /*
@@ -203,9 +203,28 @@ function writeData(num, addresses) {
     // Fill data blocks with file data
     data.children[4].children[addresses[0]].name = "File " + (num + 1) + " 1st block";
     data.children[4].children[addresses[1]].name = "File " + (num + 1) + " 2nd block";
+
+    // Set file property for easy deleting
+    data.children[4].children[addresses[0]].file = num;
+    data.children[4].children[addresses[1]].file = num;
 }
 
+/*
+* Delete from data sector
+*
+* data.children[4].children is "Data"
+* @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
+*/
+
 // Delete data
-function deleteData(address) {
+function deleteData(num) {
+    // Iterate data blocks and clear data blocks for file
+    for (let block in data.children[4].children) {
+        if (data.children[4].children.hasOwnProperty(block) &&
+            data.children[4].children[block].file === num) {
+            data.children[4].children[block].file = "";
+            data.children[4].children[block].name = "";
+        }
+    }
 
 }
