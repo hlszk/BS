@@ -22,6 +22,9 @@ function fuseOpen() {
     fuseRead(0);
     fuseRead(1);
     fuseRead(2);
+
+    // Add newly created file to delete dropdown menu
+
 }
 
 /*

@@ -33,6 +33,7 @@ const partition = data => {
         (root);
 };
 
+// Invoke drawing of container
 function drawContainer() {
 
     // Remove old visualisation elements from SVG
@@ -143,9 +144,4 @@ function labelTransform(d) {
     const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
     const y = (d.y0 + d.y1) / 2 * radius;
     return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
-}
-
-// Update visualisation with new data
-function updateData() {
-    drawContainer();
 }
