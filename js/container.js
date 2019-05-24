@@ -8,7 +8,7 @@ const maxNumberOfFiles = 16;
 // Number of files open
 var numberOfOpenFiles = 0;
 
-// Object with container structures and their block size
+// Object with container sectors and their block size
 let data = {
     "name": "Container",
     "children": [
@@ -25,6 +25,17 @@ let data = {
         }]
 };
 
+/*
+* Initializing first child object for each container sector
+*
+* It makes filling the object a lot easier,
+* because no ( n > 0 ) check required for adding new children
+*/
+for (let sector in data.children) {
+    if (data.children.hasOwnProperty(sector))
+        data.children[sector].children = [];
+}
+
 
 /*
 * ********************
@@ -36,11 +47,7 @@ let data = {
 * data.children[1].children is "DMAP"
 *
 * */
-
-// Nesting first element into container object
-data.children[1].children = [{"name": "F", "size": 1}];
-// Nesting (n > 1) element into container object
-for (let i = 1; i < 32; i++) {
+for (let i = 0; i < 32; i++) {
     data.children[1].children[i] = {"name": "F", "size": 1};
 }
 
@@ -100,6 +107,7 @@ function writeAddress() {
 function getFile(num) {
     // Current timestamp
     const date = new Date();
+    // Child node for file stat information
     return {
         "name": "File " + (num + 1),
         "children": [
@@ -118,16 +126,8 @@ function getFile(num) {
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function writeFile(num) {
-    // Get stat data for file
-    let child = getFile(num);
-
-    // Nesting first element
-    if (num === 0) {
-        data.children[3].children = [child];
-    } else {
-        // Nesting (n > 1) elements
-        data.children[3].children[num] = child;
-    }
+    // Get stat data for file and nest it into container object
+    data.children[3].children[num] = getFile(num);
 }
 
 /*
