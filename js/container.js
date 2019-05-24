@@ -13,7 +13,7 @@ let data = {
         }, {
             "name": "FAT", "size": 32
         }, {
-            "name": "Root", "size": 16
+            "name": "Root"
         }, {
             "name": "Data", "size": 32
         }]
@@ -41,7 +41,7 @@ for (let sector in data.children) {
 * data.children[1].children is "DMAP"
 *
 * */
-for (let i = 0; i < 32; i++) {
+for (let i = 0; i < 16; i++) {
     data.children[1].children[i] = {"name": "F", "size": 1};
 }
 
@@ -98,9 +98,10 @@ function writeAddress() {
 function getFile(num) {
     // Current timestamp
     const date = new Date();
+
     // Child node for file stat information
     return {
-        "name": "File " + (num + 1),
+        "name": "File " + (+num + 1),
         "children": [
             {
                 "name":

@@ -26,8 +26,7 @@ const arc = d3.arc()
 
 const partition = data => {
     const root = d3.hierarchy(data)
-        .sum(d => d.size)
-        .sort((a, b) => b.value - a.value);
+        .sum(d => d.size);
     return d3.partition()
         .size([2 * Math.PI, root.height + 1])
         (root);

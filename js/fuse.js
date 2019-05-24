@@ -16,17 +16,18 @@ function fuseInit() {
 function fuseOpen() {
     console.log("fuseOpen() called.");
 
-    // Check which files are already written
-    // TODO: fuseReaddir() or other way to select next num
+    // Find next free DMAP block
+    let freeBlock = getFreeBlock();
+    if (freeBlock !== undefined) {
+        // Allocate DMAP block
+        setBlock(freeBlock, "A");
 
-    fuseRead(0);
-    fuseRead(1);
-    fuseRead(2);
-    fuseUnlink(1);
-    fuseRead(3);
+        // Add file to root
+        fuseRead(freeBlock);
 
-    // Add newly created file to delete dropdown menu
-    createDeleteOptions();
+        // Add newly created file to delete dropdown menu
+        createDeleteOptions();
+    }
 }
 
 /*
@@ -37,6 +38,7 @@ function fuseOpen() {
 function fuseRead(num) {
     console.log("fuseRead() called.");
 
+    // Write file to root
     writeFile(num);
 
     // Make changes visible
@@ -69,11 +71,10 @@ function fuseReaddir() {
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function fuseUnlink(num) {
-    console.log("fuseUnlink() called for file " + (num + 1) + ".");
+    console.log("fuseUnlink() called.");
 
-    // Sets two DMAP blocks free
+    // Sets DMAP block free
     setBlock(num, "F");
-    setBlock((num + 1), "F");
 
     // Remove file from root sector
     deleteFile(num);

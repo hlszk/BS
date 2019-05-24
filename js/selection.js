@@ -14,9 +14,12 @@ function createDeleteOptions() {
     // Remove old menu
     d3.select('#deleteFile').remove();
 
-    // Fill options
-    // First add "Delete file" header
-    // Second add array with all files in root
+    /*
+    * Fill menu with options
+    *
+    * First add "Delete file" header
+    * Second add array with all files in root
+    */
     let deleteOptions = ["Delete file"].concat(fuseReaddir());
 
     // Remove all already deleted "undefined" files from array
@@ -42,10 +45,11 @@ function createDeleteOptions() {
 
 // Selection handler
 function selectOption() {
-    let selectValue = d3.select('select').property('value');
+    // Take menu selection string and extract file number
+    let selectValue = d3.select('select').property('value').slice(-2);
 
-    // Delete selected file
-    fuseUnlink((+selectValue.slice(-1) - 1));
+    // Delete selected file number
+    fuseUnlink(((+selectValue) - 1));
 
     // Make changes visible
     fuseWrite();
