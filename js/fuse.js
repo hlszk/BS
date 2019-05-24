@@ -43,7 +43,7 @@ function fuseUnlink(num) {
 }
 
 /*
-* Get inode data for file
+* Get stat data for file
 *
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */

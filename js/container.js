@@ -53,6 +53,8 @@ for (let i = 0; i < 32; i++) {
 
 writeFile(0);
 writeFile(1);
+writeFile(2);
+deleteFile(1);
 
 // Get next free block
 function getFreeBlock() {
@@ -126,8 +128,12 @@ function getFile(num) {
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function writeFile(num) {
-    // Get stat data for file and nest it into container object
-    data.children[3].children[num] = getFile(num);
+    // Check for number of files limit
+    (num >= maxNumberOfFiles) ?
+        console.error("error ERNOENT: File count limit reached") :
+
+        // Get stat data for file and nest it into container object
+        data.children[3].children[num] = getFile(num);
 }
 
 /*
