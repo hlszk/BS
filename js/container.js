@@ -2,12 +2,6 @@
 * Container structures.
 */
 
-// Maximal number of files stored
-const maxNumberOfFiles = 16;
-
-// Number of files open
-var numberOfOpenFiles = 0;
-
 // Object with container sectors and their block size
 let data = {
     "name": "Container",
@@ -50,11 +44,6 @@ for (let sector in data.children) {
 for (let i = 0; i < 32; i++) {
     data.children[1].children[i] = {"name": "F", "size": 1};
 }
-
-writeFile(0);
-writeFile(1);
-writeFile(2);
-deleteFile(1);
 
 // Get next free block
 function getFreeBlock() {
@@ -128,12 +117,15 @@ function getFile(num) {
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function writeFile(num) {
+    // Maximal number of files stored
+    const maxNumberOfFiles = 16;
+
     // Check for number of files limit
     (num >= maxNumberOfFiles) ?
         console.error("error ERNOENT: File count limit reached") :
 
         // Get stat data for file and nest it into container object
-        data.children[3].children[num] = getFile(num);
+        data.children[3].children[num] = fuseGetattr(num);
 }
 
 /*

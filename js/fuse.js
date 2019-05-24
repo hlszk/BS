@@ -12,17 +12,27 @@ function fuseInit() {
     drawContainer();
 }
 
-/*
-* Remove file from container
-*
-* @param isBiggerFile: false for one data block, true for two data blocks
-*/
+// Check which file number to write
 function fuseOpen() {
     console.log("fuseOpen() called.");
 
     // Check which files are already written
-    // fuseReaddir();
+    // TODO: fuseReaddir();
 
+    fuseWrite(0);
+    fuseWrite(1);
+
+}
+
+/*
+* Write file to container object
+*
+* @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
+*/
+function fuseWrite(num) {
+    console.log("fuseWrite() called.");
+
+    writeFile(num);
 }
 
 // Lists all files written in container
@@ -40,6 +50,13 @@ function fuseReaddir() {
 function fuseUnlink(num) {
     console.log("fuseUnlink() called.");
 
+    // Sets two DMAP blocks free
+    setBlock(num, "F");
+    setBlock((num + 1), "F");
+
+    // Remove file from root sector
+    deleteFile(num);
+
 }
 
 /*
@@ -50,6 +67,7 @@ function fuseUnlink(num) {
 function fuseGetattr(num) {
     console.log("fuseGetattr() called.");
 
+    return getFile(num);
 }
 
 // FUSE methods to implement
@@ -58,7 +76,5 @@ var fuseMethods = [
     "fuseRead",
     "fuseRelease",
     "fuseMknod",
-    "fuseWrite",
-    "fuseUnlink"
 ];
 */
