@@ -233,6 +233,11 @@ function deleteData(num) {
     for (let block in data.children[4].children) {
         if (data.children[4].children.hasOwnProperty(block) &&
             data.children[4].children[block].file === num) {
+
+            // Put data block back to list of available data blocks
+            dataBlocksAvailable.push(+block);
+
+            // Empty data block
             data.children[4].children[block].file = "";
             data.children[4].children[block].name = "";
         }
