@@ -11,7 +11,7 @@ let data = {
         }, {
             "name": "DMAP",
         }, {
-            "name": "FAT", "size": 32
+            "name": "FAT"
         }, {
             "name": "Root"
         }, {
@@ -78,9 +78,33 @@ function readAddress() {
 
 }
 
-// Write next address to table
-// Addresses are randomized for better understanding the need of an allocation table
-function writeAddress() {
+/*
+* Write next address to table
+*
+* data.children[2].children is "FAT"
+* @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
+*/
+function writeAddress(num) {
+    // One DMAP block points to two FAT blocks
+    let fatBlock = (num * 2);
+
+    /*
+    * As stated in README, FAT sector points to random data blocks
+    * This promotes a better understanding of how the allocation table works
+    *
+    */
+    // Shuffle array with available data blocks
+    dataBlocksAvailable.sort(() => Math.random() - 0.5);
+
+    // Pop two free data blocks from array with available data blocks
+    // Save these two free data block addresses to new array
+    let dataBlocksToFill = dataBlocksAvailable.splice(0,2);
+
+    // Write two fat blocks with addresses in data block
+    data.children[2].children[fatBlock] =
+        {"name": (+num + 1) + " → " + dataBlocksToFill[0], "size": 1, "address": dataBlocksToFill[0]};
+    data.children[2].children[++fatBlock] =
+        {"name": (+num + 1) + " → " + dataBlocksToFill[1], "size": 1, "address": dataBlocksToFill[1]};
 
 }
 
@@ -149,6 +173,13 @@ function deleteFile(num) {
 * ********************
 * DATA
 */
+
+/*
+* Array with 32 elements representing data blocks available to fill
+* Looks like [0, 1, ... , 31]
+*
+* */
+let dataBlocksAvailable = [...Array(32).keys()].map(x => x);
 
 /*
 * Draw empty data blocks

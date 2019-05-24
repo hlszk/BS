@@ -20,4 +20,5 @@ Das Rendering von 65536 Datenblöcken und derer Belegungsanzeige in den anderen 
 * Jede Datei hat eine Größe von zwei Datenblöcken
 * Es sind maximal 16 Dateien zugelassen
 * Damit das Zusammenspiel zwischen den stark verkleinerten Sektoren besser veranschaulicht wird, werden die zu beschreibenden Datenblöcke per Zufallsgenerator bestimmt
+* Die FAT wird im Idealfall durch eine verlinkte Liste implementiert: Da jedoch immer nur zwei Elemente verlinkt werden, wurde auf diese Datenstruktur verzichtet
 
