@@ -31,6 +31,7 @@ function fuseOpen() {
 */
 function fuseRead(num) {
     console.log("fuseRead() called.");
+
     writeFile(num);
 
     // Make changes visible
@@ -40,6 +41,7 @@ function fuseRead(num) {
 // Write a.k.a. "draw" file to container object
 function fuseWrite() {
     console.log("fuseWrite() called.");
+
     drawContainer();
 }
 
@@ -73,6 +75,7 @@ function fuseUnlink(num) {
 */
 function fuseGetattr(num) {
     console.log("fuseGetattr() called.");
+
     return getFile(num);
 }
 
