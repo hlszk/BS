@@ -48,7 +48,7 @@ function selectOption() {
     // Take menu selection string and extract file number
     let selectValue = d3.select('select').property('value').slice(-2);
 
-    // Delete selected file number
+    // Convert file number string to number and delete that file
     fuseUnlink(((+selectValue) - 1));
 
     // Make changes visible
