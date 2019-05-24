@@ -82,6 +82,9 @@ function fuseUnlink(num) {
     // Deletes file from data sector
     deleteData(num);
 
+    // Deletes address blocks from FAT
+    readAddress(num);
+
     // Remove file from root sector
     deleteFile(num);
 }
@@ -96,10 +99,3 @@ function fuseGetattr(num) {
 
     return getFile(num);
 }
-
-// FUSE methods to implement
-/*
-var fuseMethods = [
-    "fuseRelease"
-];
-*/

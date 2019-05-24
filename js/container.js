@@ -73,9 +73,20 @@ function setBlock(block, state) {
 * FAT
 */
 
-// Read next address in table
-function readAddress() {
+/*
+* NORMALLY: Read next address to table
+* ... but because we are not using a linked list, it is just deleting addresses from FAT
+*
+* data.children[2].children is "FAT"
+* @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
+*/
+function readAddress(num) {
 
+    for (let block in data.children[2].children) {
+        if (data.children[2].children.hasOwnProperty(block) &&
+            data.children[2].children[block].file === num)
+            data.children[2].children[block] = {};
+    }
 }
 
 /*
@@ -102,9 +113,9 @@ function writeAddress(num) {
 
     // Write two fat blocks with addresses in data block
     data.children[2].children[fatBlock] =
-        {"name": (num + 1) + " → " + dataBlocksToFill[0], "size": 1, "address": dataBlocksToFill[0]};
+        {"name": (num + 1) + " → " + dataBlocksToFill[0], "size": 1, "file": num};
     data.children[2].children[++fatBlock] =
-        {"name": (num + 1) + " → " + dataBlocksToFill[1], "size": 1, "address": dataBlocksToFill[1]};
+        {"name": (num + 1) + " → " + dataBlocksToFill[1], "size": 1, "file": num};
 
     // Write to data sector
     writeData(num, dataBlocksToFill);
