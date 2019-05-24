@@ -15,7 +15,7 @@ let data = {
         }, {
             "name": "Root"
         }, {
-            "name": "Data", "size": 32
+            "name": "Data"
         }]
 };
 
@@ -150,9 +150,20 @@ function deleteFile(num) {
 * DATA
 */
 
+/*
+* Draw empty data blocks
+* data.children[1].children is "Data"
+*
+* */
+for (let i = 0; i < 32; i++) {
+    data.children[4].children[i] = {"name": "", "size": 1};
+}
+
 // Write in data sector
 function writeData(address) {
-
+    console.log(data.children[4].children[address].name);
+    data.children[4].children[address].name = "File 1";
+    console.log(data.children[4].children[address].name);
 }
 
 // Delete data

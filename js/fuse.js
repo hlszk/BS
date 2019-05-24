@@ -22,6 +22,8 @@ function fuseOpen() {
         // Allocate DMAP block
         setBlock(freeBlock, "A");
 
+        // TODO: Add FAT and Data
+
         // Add file to root
         fuseRead(freeBlock);
 
