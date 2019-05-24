@@ -17,14 +17,16 @@ function fuseOpen() {
     console.log("fuseOpen() called.");
 
     // Check which files are already written
-    // TODO: fuseReaddir();
+    // TODO: fuseReaddir() or other way to select next num
 
     fuseRead(0);
     fuseRead(1);
     fuseRead(2);
+    fuseUnlink(1);
+    fuseRead(3);
 
     // Add newly created file to delete dropdown menu
-
+    createDeleteOptions();
 }
 
 /*
@@ -52,7 +54,13 @@ function fuseWrite() {
 function fuseReaddir() {
     console.log("fuseReaddir() called.");
 
-    // console.log(data.children[3].children);
+    let files = [];
+    // Add all files in root to array
+    for (let child in data.children[3].children)
+        if (data.children[3].children.hasOwnProperty(child))
+            files.push(data.children[3].children[child].name);
+
+    return files;
 }
 
 /*
@@ -61,7 +69,7 @@ function fuseReaddir() {
 * @param num: The number under which the file was stored: [0..(maxNumberOfFiles - 1)]
 */
 function fuseUnlink(num) {
-    console.log("fuseUnlink() called.");
+    console.log("fuseUnlink() called for file " + (num + 1) + ".");
 
     // Sets two DMAP blocks free
     setBlock(num, "F");
